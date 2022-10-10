@@ -1,5 +1,6 @@
 
-let mans =[]
+// let mans =[]
+let mf = require("./mf.json")
 module.exports = {
 
     getCompliment: (req, res) => {
@@ -17,16 +18,20 @@ module.exports = {
     let randomFortune = fortunes[randomIndex];
     res.status(200).send(randomFortune)
    },
-
+   deletegoal: (req, res) => {
+    let index = mf.findIndex(elem => elem.id === +req.params.Name)
+    mf.splice(index, 1)
+    res.status(200).send(mf)
+},
    addGoal: (req,res) => {
-    let {Name, Manifest, status} = req.body;
+    let {Name, Manifest, statuss} = req.body;
     let manifestation = {
        
         Name,
         Manifest,
-        status
+        statuss
     }
-    mans.push(manifestation)
+    mf.push(manifestation)
     let manReturn = {...manifestation}
     res.status(200).send(manReturn)
      

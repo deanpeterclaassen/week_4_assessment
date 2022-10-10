@@ -1,8 +1,9 @@
 // 
-const goalContainer = document.querySelector("#info")
+const goalContainer = document.querySelector("#goalinfo")
 const complimentBtn = document.getElementById("complimentButton")
 const fortuneBtn = document.getElementById("fortunes")
-const form = document.querySelector("form")
+const form = document.querySelector("#goalss")
+const deleteg = document.querySelector("#delete")
 
 const getCompliment = () => {
     axios.get("http://localhost:4000/api/compliment/")
@@ -21,6 +22,7 @@ const getFortune = () => {
 
 
 };
+const deletegoal = Name => axios.delete(`http://localhost:4000/api/goals/${Name}`).then(res=> console.log(res.data))
 
 const addGoal = body =>{
     axios.post("http://localhost:4000/api/goals/",body).then(res => {
@@ -35,13 +37,13 @@ function addGoals(e) {
 
     let Name = document.querySelector('#Name')
     let Manifest = document.querySelector('#Manifest')
-    let status = document.querySelector("#status")
+    let statuss = document.querySelector("#statuss")
     
 
     let bodyObj = {
         Name: Name.value,
         Manifest: Manifest.value, 
-        status: status.value
+        statuss: statuss.value
         
     }
 
@@ -49,22 +51,24 @@ function addGoals(e) {
 
     Name.value = ''
     Manifest.value = ''
-    status.value = ''
+    statuss.value = ''
     
 }
 
-function createGoal(data){
+function createGoal(mf){
     {
         goalContainer.innerHTML = ''
-        const infoCard = document.createElement('div')
-        infoCard.classList.add('info-card')
+        const goalCard = document.createElement('div')
+        goalCard.classList.add('goal-card')
     
-        infoCard.innerHTML = `<p class="Name">Name: ${data.Name}</p>
-        <p class="Manifest">Goal: ${data.Manifest}</p>
-        <p class= "status">Status:${data.status}`
-        goalContainer.appendChild(infoCard)
+        goalCard.innerHTML = `<p class="Name">Name: ${mf.Name}</p>
+        <p class="Manifest">Goal: ${mf.Manifest}</p>
+        <p class= "statuss">Status:${mf.statuss}`
+        goalContainer.appendChild(goalCard)
+        console.log(mf)
     }
 }
 complimentBtn.addEventListener('click', getCompliment)
 fortuneBtn.addEventListener('click', getFortune)
 form.addEventListener("submit", addGoals)
+deleteg.addEventListener("submit",deletegoal)
