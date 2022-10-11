@@ -1,6 +1,7 @@
+const goals = [
+    {id: 13, goal: "see more birds" }
+]
 
-// let mans =[]
-let mf = require("./mf.json")
 module.exports = {
 
     getCompliment: (req, res) => {
@@ -18,27 +19,32 @@ module.exports = {
     let randomFortune = fortunes[randomIndex];
     res.status(200).send(randomFortune)
    },
-   deletegoal: (req, res) => {
-    let index = mf.findIndex(elem => elem.id === +req.params.Name)
-    mf.splice(index, 1)
-    res.status(200).send(mf)
-},
-   addGoal: (req,res) => {
-    let {Name, Manifest, statuss} = req.body;
-    let manifestation = {
-       
-        Name,
-        Manifest,
-        statuss
+
+   addGoal: (req,res)=> {
+    console.log(req.body);
+    const addGoals = {
+        name: req.body.id,
+        goal: req.body.goal
     }
-    mf.push(manifestation)
-    let manReturn = {...manifestation}
-    res.status(200).send(manReturn)
-     
+    goals.push(addGoals);
+    res.status(200).json({message: "added succesfully"})
+   },
+//    editGoal: (req,res)=>{
+//         const { id } = req.params;
+//         const goalEdit = goals.find((goal_obj) =>  goal_obj.id === parseInt(id))
+//         goalEdit.goal = req.body.goal;
+//         res.status(200).json({message: "success", goals})},
 
+   deleteGoal: (req,res)=> {
+    goals.pop();
+    res.status(200).json({message: "deleted goal"})
+ 
+   },
 
+   getGoals: (req,res) => {
 
+    res.status(200).send(goals)
+   },
 
-   }
+}   
 
-}

@@ -1,9 +1,10 @@
 // 
-const goalContainer = document.querySelector("#goalinfo")
+
 const complimentBtn = document.getElementById("complimentButton")
 const fortuneBtn = document.getElementById("fortunes")
-const form = document.querySelector("#goalss")
-const deleteg = document.querySelector("#delete")
+const form = document.querySelector("#addGoal")
+const deletes = document.querySelector("#delete")
+const allgoals = document.querySelector('#allgoals')
 
 const getCompliment = () => {
     axios.get("http://localhost:4000/api/compliment/")
@@ -17,58 +18,44 @@ const getFortune = () => {
     axios.get("http://localhost:4000/api/fortune/")
         .then(res => {
             const data = res.data;
-            alert(data)
+            alert.log(data)
         })
 
 
 };
-const deletegoal = Name => axios.delete(`http://localhost:4000/api/goals/${Name}`).then(res=> console.log(res.data))
 
-const addGoal = body =>{
-    axios.post("http://localhost:4000/api/goals/",body).then(res => {
-        createGoal(res.data)
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    let goalId = document.querySelector("#id").value;
+    let goalText = document.querySelector("#goalSubmit").value;
+    let goals = {
+        id: goalId,
+        goal: goalText
+    }
+    axios.post("http://localhost:4000/api/goals", goals)
+    .then(res => { console.log(res)})
+
+    console.log(goals)
+})
+
+const deleteGoal = () =>{
+    axios.delete("http://localhost:4000/api/goals").then(res=>{
+        const data = res.data;
+        console.log(data);
+        
     })
 }
-
-
-
-function addGoals(e) {
-    e.preventDefault()
-
-    let Name = document.querySelector('#Name')
-    let Manifest = document.querySelector('#Manifest')
-    let statuss = document.querySelector("#statuss")
-    
-
-    let bodyObj = {
-        Name: Name.value,
-        Manifest: Manifest.value, 
-        statuss: statuss.value
-        
+const getGoals = () => {
+    axios.get("http://localhost:4000/api/goals")
+        .then(res => {
+            const data = res.data;
+            console.log(data)
+        })
     }
 
-    addGoal(bodyObj)
-
-    Name.value = ''
-    Manifest.value = ''
-    statuss.value = ''
-    
-}
-
-function createGoal(mf){
-    {
-        goalContainer.innerHTML = ''
-        const goalCard = document.createElement('div')
-        goalCard.classList.add('goal-card')
-    
-        goalCard.innerHTML = `<p class="Name">Name: ${mf.Name}</p>
-        <p class="Manifest">Goal: ${mf.Manifest}</p>
-        <p class= "statuss">Status:${mf.statuss}`
-        goalContainer.appendChild(goalCard)
-        console.log(mf)
-    }
-}
+;
+allgoals.addEventListener("click", getGoals)
+deletes.addEventListener("click", deleteGoal)
 complimentBtn.addEventListener('click', getCompliment)
 fortuneBtn.addEventListener('click', getFortune)
-form.addEventListener("submit", addGoals)
-deleteg.addEventListener("submit",deletegoal)
+    

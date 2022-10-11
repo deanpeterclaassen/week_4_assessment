@@ -6,31 +6,20 @@
   <body class="container">
     <button id="complimentButton">Get a compliment</button>
     <button id="fortunes">Get a fortune :)</button>
-    <form id="goalss">
-        <input type="text"
-        id="Name"
-        placeholder="Your name please">
-
-        <input type="text"
-        id="Manifest"
-        placeholder="Goal I want to accomplish">
-
-        <input type="text"
-        id="statuss"
-        placeholder="status of my goal">
-        <button>Track</button>
-        
-
-    </form>
-
-    <form id="delete">
+    <Form id="addGoal">
       <input type="text"
-      id="deletaname"
-      placeholder="enter name to delete goal">
-    <button >delete</button>
-  </form>
+      id="id"
+      placeholder="ID number">
+      <input type="text"
+      id="goalSubmit"
+      placeholder="Add a goal here">
+      <input type="submit">
+    </Form>
+    <button id="allgoals">see all goals</button>
+    <button id="delete">delete most recent goal</button>
 
-    <section id="goalinfo"></section>
+
+
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="main.js"></script>
