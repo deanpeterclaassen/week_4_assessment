@@ -1,10 +1,21 @@
+
+
 const goals = [
     {id: 13, goal: "see more birds" }
 ]
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+  accessToken: '8d8cb9ea30c84329a7f417d14c64f3a2',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
 
+// record a generic message and send it to Rollbar
+rollbar.log('Hello world!')
 module.exports = {
 
     getCompliment: (req, res) => {
+        
         const compliments = ["Gee, you're a smart cookie!", "Cool shirt!", "Your Javascript skills are stellar."];
       
         // choose random compliment
