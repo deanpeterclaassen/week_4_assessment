@@ -43,6 +43,7 @@ module.exports = {
 
    getGoals: (req,res) => {
 
+    
     res.status(200).send(goals)
    },
 

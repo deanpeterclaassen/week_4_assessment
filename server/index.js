@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 
 app.use(express.json());
-
+app.use(express.static('public'))
 const { getCompliment, deleteGoal } = require('./controller')
 const { getFortune } = require("./controller")
 const { addGoal, getGoals} = require("./controller")
@@ -23,4 +23,5 @@ app.post("/api/goals", addGoal)
 
 app.delete("/api/goals", deleteGoal)
 
-app.listen(4000, () => console.log("Server running on 4000"))
+const port = process.env.PORT || 4000
+app.listen(port, () => console.log("Server running on 4000"))
