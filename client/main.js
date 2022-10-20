@@ -7,7 +7,7 @@ const deletes = document.querySelector("#delete")
 const allgoals = document.querySelector('#allgoals')
 
 const getCompliment = () => {
-    axios.get("http://localhost:4000/api/compliment/")
+    axios.get("/api/compliment/")
         .then(res => {
             const data = res.data;
             alert(data);
@@ -15,7 +15,7 @@ const getCompliment = () => {
 };
 
 const getFortune = () => {
-    axios.get("http://localhost:4000/api/fortune/")
+    axios.get("/api/fortune/")
         .then(res => {
             const data = res.data;
             alert.log(data)
@@ -32,21 +32,21 @@ form.addEventListener("submit", (event) => {
         id: goalId,
         goal: goalText
     }
-    axios.post("http://localhost:4000/api/goals", goals)
+    axios.post("/api/goals", goals)
     .then(res => { console.log(res)})
 
     console.log(goals)
 })
 
 const deleteGoal = () =>{
-    axios.delete("http://localhost:4000/api/goals").then(res=>{
+    axios.delete("/api/goals").then(res=>{
         const data = res.data;
         console.log(data);
         
     })
 }
 const getGoals = () => {
-    axios.get("http://localhost:4000/api/goals")
+    axios.get("/api/goals")
         .then(res => {
             const data = res.data;
             console.log(data)
