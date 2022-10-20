@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 
 app.use(express.json());
-app.use(express.static('public'))
+app.use(express.static('client'))
 const { getCompliment, deleteGoal } = require('./controller')
 const { getFortune } = require("./controller")
 const { addGoal, getGoals} = require("./controller")
